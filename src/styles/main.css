@@ -1,10 +1,12 @@
-/* ==========================================================================
+/* ===========================================================================
    SimJeongBin Portfolio - Main Stylesheet
    Source: Figma file "portfolio-SimJeongBin" (Node 25:3)
-   ========================================================================== */
+   =========================================================================== */
 
 /* Reset & Box Sizing */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,73 +30,90 @@ body {
 
 /* Container: Exact 1440px desktop frame */
 .portfolio-main {
-  width: 1440px;
-  min-height: 2368px;
+  width: 100%;
+  padding: 0;
+  min-height: 100vh;
   position: relative;
   background-color: var(--color-black-0);
+  display: flex;
+  flex-direction: column;
 }
 
-/* ==========================================================================
+/* ===========================================================================
    Header (Node 37:2819)
-   x: 0, y: 0, w: 1440, h: 80
-   padding: px: 80px, py: 20px, align-items: flex-end
-   Fixed at top of viewport, centered with the 1440px layout
-   ========================================================================== */
+   =========================================================================== */
 .header {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1440px;
+  left: 0;
+  transform: none;
+  width: 100%;
+  max-width: none;
   height: 80px;
-  padding: 20px 80px;
+  padding: 20px;
+  /* 20px left margin, keep vertical padding */
   display: flex;
   align-items: flex-end;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
   z-index: 1000;
   pointer-events: none;
 }
 
 .header-brand {
   pointer-events: auto;
-  font-family: var(--typography-header-brand-font-family);
-  font-size: var(--typography-header-brand-font-size);
-  font-weight: var(--typography-header-brand-font-weight);
-  line-height: var(--typography-header-brand-line-height);
-  letter-spacing: var(--typography-header-brand-letter-spacing);
-  color: var(--color-black-800);
+  font-family: "Syne", sans-serif;
+  /* Syne ExtraBold */
+  font-size: 20px;
+  font-weight: 800;
+  /* ExtraBold */
+  line-height: 1.2;
+  /* 120% */
+  letter-spacing: -0.4px;
+  color: #1A1A1A;
+  /* black/800 */
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* ==========================================================================
-   Top Section: Index (x: 80, y: 280, w: 411) + Project H. (x: 515, y: 280, w: 845)
-   ========================================================================== */
+/* Remove link styling for logo in all states */
+.header-brand:link,
+.header-brand:visited,
+.header-brand:hover,
+.header-brand:active {
+  color: #1A1A1A;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Index Section (two columns)
+   --------------------------------------------------------------------------- */
 .top-section {
   position: absolute;
-  top: 280px;
-  left: 80px;
-  width: 1280px; /* 515 - 80 = 435 gap/offset; 411 + 24 (or 25) = 435 */
+  top: 100px;
+  /* Y position for index */
+  left: 20px;
+  /* left margin */
+  width: calc(100% - 40px);
+  max-width: none;
+  /* 1440 - 20*2 */
   display: flex;
-  gap: 24px;
+  gap: 10px;
+  /* column gap */
   align-items: flex-start;
 }
 
-/* Index Navigation (Node 31:2767)
-   x: 80, y: 280, w: 411, h: 376
-   flex-col, gap: 100px
-   ========================================================================== */
-.index-nav {
-  width: 411px;
+.index-columns {
   display: flex;
-  flex-direction: column;
-  gap: 100px;
-  flex-shrink: 0;
+  gap: 10px;
+  width: 100%;
+  max-width: none;
+
+}
+
+.index-column {
+  width: calc((100% - 10px) / 2);
+  /* each column */
 }
 
 .index-group {
@@ -102,12 +121,16 @@ body {
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  max-width: none;
+
 }
 
 .index-group-header {
   border-bottom: 1px solid var(--color-black-800);
   padding-bottom: 4px;
   width: 100%;
+  max-width: none;
+
 }
 
 .index-title-row {
@@ -115,6 +138,8 @@ body {
   gap: 10px;
   align-items: flex-start;
   width: 100%;
+  max-width: none;
+
   height: 28px;
 }
 
@@ -143,6 +168,8 @@ body {
   flex-direction: column;
   gap: 4px;
   width: 100%;
+  max-width: none;
+
   font-family: var(--typography-xsmall-regular-font-family);
   font-size: var(--typography-xsmall-regular-font-size);
   font-weight: var(--typography-xsmall-regular-font-weight);
@@ -152,10 +179,13 @@ body {
 
 .index-item {
   display: flex;
-  gap: 40px;
+  gap: 0px;
+  /* zero gap between number and text */
   align-items: center;
   height: 18px;
   width: 100%;
+  max-width: none;
+
   cursor: pointer;
   text-decoration: none;
   color: inherit;
@@ -177,44 +207,67 @@ body {
   color: var(--color-black-800);
 }
 
-/* ==========================================================================
-   Featured Project Card: Project H. (Node 39:48)
-   x: 515, y: 280, w: 845, h: 656
-   ========================================================================== */
-.featured-card {
-  width: 845px;
+/* ---------------------------------------------------------------------------
+   Projects Grid (two‑column layout)
+   --------------------------------------------------------------------------- */
+.projects-grid {
+  margin: 386px 20px 0 20px;
+  width: calc(100% - 40px);
+  max-width: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* vertical gap between rows */
+}
+
+.grid-row {
+  display: flex;
+  gap: 10px;
+  /* horizontal gap between columns */
+  align-items: flex-start;
+  width: 100%;
+  max-width: none;
+
+}
+
+.project-card {
+  width: calc((100% - 10px) / 2);
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex-shrink: 0;
   cursor: pointer;
-  text-decoration: none;
-  color: inherit;
 }
 
-.featured-image-wrapper {
-  width: 845px;
-  height: 600px;
-  border-radius: 60px;
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 695 / 400;
+  height: auto;
+  border-radius: 0px;
   overflow: hidden;
   background-color: var(--color-unverified-placeholder-gray);
   position: relative;
-  flex-shrink: 0;
 }
 
 .card-image {
   width: 100%;
+  max-width: none;
+
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 60px;
+  border-radius: 0px;
   pointer-events: none;
   transform: scale(1.04);
   transition: transform 400ms ease-out;
   will-change: transform;
 }
 
-.featured-card:hover .card-image,
+/* Smart IoT Service - Image Position */
+.project-card.smart-iot .card-image {
+  object-position: center 60%;
+}
+
 .project-card:hover .card-image {
   transform: scale(1);
 }
@@ -222,9 +275,13 @@ body {
 .card-info {
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 0;
+  /* removed horizontal padding */
   width: 100%;
+  max-width: none;
+
   line-height: 1.4;
+  gap: 10px;
 }
 
 .card-meta-row {
@@ -232,10 +289,13 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: none;
+
   height: 18px;
-  font-family: var(--font-family-pretendard);
-  font-size: 13px;
-  letter-spacing: -0.39px;
+  font-family: var(--typography-xsmall-regular-font-family);
+  font-size: var(--typography-xsmall-regular-font-size);
+  line-height: var(--typography-xsmall-regular-line-height);
+  letter-spacing: var(--typography-xsmall-regular-letter-spacing);
   white-space: nowrap;
 }
 
@@ -251,73 +311,24 @@ body {
 
 .card-title {
   font-family: var(--typography-regular-regular-m-font-family);
-  font-size: var(--typography-regular-regular-m-font-size);
-  font-weight: var(--typography-regular-regular-m-font-weight);
-  line-height: var(--typography-regular-regular-m-line-height);
-  letter-spacing: var(--typography-regular-regular-m-letter-spacing);
+  font-size: var(--typography-small-regular-font-size);
+  font-weight: var(--typography-small-regular-font-weight);
+  line-height: var(--typography-small-regular-line-height);
+  letter-spacing: var(--typography-small-regular-letter-spacing);
   color: var(--color-black-800);
   margin: 0;
 }
 
-/* ==========================================================================
-   Projects Grid (Node 79:270)
-   x: 80, y: 956, w: 1281, h: 1092
-   gap: 20px between rows (556 - 536 = 20px)
-   ========================================================================== */
-.projects-grid {
-  position: absolute;
-  top: 956px;
-  left: 80px;
-  width: 1281px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.grid-row {
-  display: flex;
-  gap: 25px;
-  align-items: flex-start;
-  width: 1281px;
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.card-411 {
-  width: 411px;
-}
-
-.card-410 {
-  width: 410px;
-}
-
-.project-image-wrapper {
-  width: 100%;
-  height: 480px;
-  border-radius: 60px;
-  overflow: hidden;
-  background-color: var(--color-unverified-placeholder-gray);
-  position: relative;
-  flex-shrink: 0;
-}
-
-/* ==========================================================================
-   Footer: BACK TO TOP (Node 59:15)
-   x: 612, y: 2248, w: 217, h: 20
-   (1440 - 217) / 2 = 611.5px -> exact center
-   ========================================================================== */
+/* ---------------------------------------------------------------------------
+   Footer – BACK TO TOP
+   --------------------------------------------------------------------------- */
 .footer {
-  position: absolute;
-  top: 2248px;
-  left: 612px;
-  width: 217px;
+  margin: 80px auto 20px auto;
+  width: auto;
   height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .back-to-top {
@@ -353,9 +364,55 @@ body {
   height: 20px;
 }
 
-/* ==========================================================================
+/* ===========================================================================
+   Entrance Animation (Fade Up)
+   =========================================================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-brand,
+.index-nav,
+.grid-row {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.header-brand {
+  animation-delay: 0ms;
+}
+
+.index-nav {
+  animation-delay: 120ms;
+}
+
+.grid-row:nth-child(1) {
+  animation-delay: 250ms;
+}
+
+.grid-row:nth-child(2) {
+  animation-delay: 370ms;
+}
+
+.grid-row:nth-child(3) {
+  animation-delay: 490ms;
+}
+
+.grid-row:nth-child(4) {
+  animation-delay: 610ms;
+}
+
+/* ===========================================================================
    Accessibility: Reduced Motion
-   ========================================================================== */
+   =========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -365,5 +422,479 @@ body {
   .index-name {
     transition: none !important;
   }
+
+  .header-brand,
+  .index-nav,
+  .grid-row {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
+/* ---------------------------------------------------------------------------
+   Index Navigation Layout (added)
+   --------------------------------------------------------------------------- */
+.index-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  max-width: none;
+
+  align-items: flex-start;
+}
+
+.index-nav > .index-group {
+  width: calc((100% - 10px) / 2);
+  flex-shrink: 0;
+}
+
+/* Remove underline for Project H. card (anchor) */
+a.project-card,
+a.project-card:link,
+a.project-card:visited,
+a.project-card:hover,
+a.project-card:active {
+  text-decoration: none;
+}
+
+/* ===========================================================================
+   Project Detail Overlay: LOTTE MART × ZETTA Renewal
+   =========================================================================== */
+
+/* Overlay opening / closing keyframes — no scale transforms */
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+/* Fade-up for image column and info panel — translateY only, no scale */
+@keyframes overlayFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.project-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: none;
+  overscroll-behavior: contain;
+  /* Hide native cursor over empty overlay area */
+  cursor: none;
+  /* Prevent any inherited transform from ancestors */
+  transform: none;
+}
+
+.project-overlay.is-open {
+  display: block;
+}
+
+.project-overlay.is-closing {
+  display: block;
+}
+
+/* Independent overlay backdrop: opacity fade with 30px blur */
+.project-overlay-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  pointer-events: none;
+  z-index: 2001;
+}
+
+.project-overlay.is-open .project-overlay-backdrop {
+  animation: overlayFadeIn 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.project-overlay.is-closing .project-overlay-backdrop {
+  animation: overlayFadeOut 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Image column: fade-up, no scale */
+.project-overlay.is-open .project-overlay-scroll-column {
+  animation: overlayFadeUp 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.project-overlay.is-closing .project-overlay-scroll-column {
+  animation: overlayFadeOut 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Left info panel: fade-up with 100ms delay */
+.project-overlay.is-open .project-overlay-info {
+  animation: overlayFadeUp 650ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+}
+
+.project-overlay.is-closing .project-overlay-info {
+  animation: overlayFadeOut 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Header & logo: NO entrance or exit animations. Remain 100% visible and stationary */
+.project-overlay.is-open .project-overlay-header,
+.project-overlay.is-closing .project-overlay-header {
+  animation: none;
+}
+
+/* Prevent scrollbar removal from shifting page horizontally */
+body.overlay-open {
+  overflow: hidden;
+  /* Reserve scrollbar width to prevent layout shift */
+  padding-right: var(--scrollbar-width, 0px);
+}
+
+body.overlay-open .header {
+  padding-right: calc(20px + var(--scrollbar-width, 0px));
+}
+
+/* -------------------------------------------------------------------------
+   Overlay cursor zones
+   .project-overlay already sets cursor: none on the outer container.
+   Child elements that need a native cursor restore it here.
+   ------------------------------------------------------------------------- */
+
+/* Restore native cursors over all interactive overlay sub-elements */
+.project-overlay-header,
+.project-overlay-logo,
+.project-overlay-info,
+.project-overlay-scroll-column {
+  cursor: auto;
+}
+
+.project-overlay-logo {
+  cursor: pointer;
+}
+
+/* Project images in overlays: hide cursor so "Focus" label shows */
+.project-overlay-scroll-column .project-overlay-img {
+  cursor: none;
+}
+
+/* -------------------------------------------------------------------------
+   Shared overlay custom cursor  (Back / Focus)
+   Sits on <body> at z-index 9999 so mix-blend-mode: difference blends
+   against the fully-composited visual output of all layers beneath it,
+   including the backdrop-filter layer.
+   ------------------------------------------------------------------------- */
+.overlay-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  font-family: var(--font-family-pretendard);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.6px;
+  /* difference blend: white inverts underlying colours */
+  color: #ffffff;
+  mix-blend-mode: difference;
+  white-space: nowrap;
+  user-select: none;
+  /* JS sets transform: translate(calc(-50% + Xpx), calc(-50% + Ypx)) */
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  /* Fade only on show/hide; text swap is instant */
+  transition: opacity 120ms ease;
+  will-change: transform;
+}
+
+.overlay-cursor.is-visible {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------
+   Image Focus Modal  (shared across all project overlays)
+   ------------------------------------------------------------------------- */
+.image-focus-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  /* Hide native cursor over empty backdrop — shared Back cursor takes over */
+  cursor: none;
+}
+
+.image-focus-modal.is-open {
+  display: flex;
+}
+
+/* Semi-opaque dark scrim */
+.image-focus-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-focus-modal.is-open .image-focus-backdrop {
+  opacity: 1;
+}
+
+.image-focus-modal.is-closing .image-focus-backdrop {
+  opacity: 0;
+}
+
+/* Centred image container — hide all cursors over the enlarged image.
+   The modal root already sets cursor: none for the backdrop; this ensures
+   the image itself and its container also show no cursor whatsoever. */
+.image-focus-container {
+  position: relative;
+  z-index: 1;
+  cursor: none;  /* no native cursor over enlarged image — matches modal root */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.image-focus-modal.is-open .image-focus-container {
+  opacity: 1;
+}
+
+.image-focus-modal.is-closing .image-focus-container {
+  opacity: 0;
+}
+
+.image-focus-img {
+  display: block;
+  max-width: 90vw;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  /* Keep image sharp — no scaling applied */
+  image-rendering: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-focus-backdrop,
+  .image-focus-container {
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-overlay.is-open,
+  .project-overlay.is-closing,
+  .project-overlay.is-open .project-overlay-backdrop,
+  .project-overlay.is-closing .project-overlay-backdrop,
+  .project-overlay.is-open .project-overlay-scroll-column,
+  .project-overlay.is-closing .project-overlay-scroll-column,
+  .project-overlay.is-open .project-overlay-info,
+  .project-overlay.is-closing .project-overlay-info {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.project-overlay-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 2010;
+  pointer-events: none;
+}
+
+.project-overlay-logo {
+  pointer-events: auto;
+  font-family: var(--font-family-syne);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--color-black-800);
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+
+.project-overlay-logo:hover {
+  opacity: 0.7;
+}
+
+.project-overlay-info {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  width: 401px;
+  max-width: calc(34vw - 40px);
+  z-index: 2005;
+  pointer-events: auto;
+}
+
+.overlay-title-group {
+  width: 100%;
+  border-bottom: 1px solid var(--color-black-800);
+  padding-bottom: 11px;
+  margin-bottom: 40px;
+}
+
+.overlay-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.overlay-explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-family-pretendard);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.39px;
+  color: var(--color-black-800);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 150ms ease;
+}
+
+.overlay-explore-link:hover {
+  opacity: 0.6;
+}
+
+.overlay-explore-link .explore-arrow {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.overlay-project-title {
+  font-family: var(--font-family-pretendard);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.48px;
+  color: var(--color-black-800);
+  margin: 0;
+}
+
+.overlay-project-category {
+  font-family: var(--font-family-pretendard);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: -0.39px;
+  color: var(--color-black-800);
+  margin: 0;
+}
+
+.overlay-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.overlay-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.overlay-detail-label {
+  font-family: var(--font-family-pretendard);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: -0.39px;
+  color: var(--color-black-800);
+  margin: 0;
+}
+
+.overlay-detail-text {
+  font-family: var(--font-family-pretendard);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: -0.39px;
+  color: var(--color-black-800);
+  word-break: keep-all;
+  margin: 0;
+}
+
+.overlay-detail-row {
+  display: flex;
+  gap: 20px;
+}
+
+.overlay-detail-row .overlay-detail-item {
+  width: calc((100% - 20px) / 2);
+}
+
+.project-overlay-scroll-column {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: max(440px, 34vw);
+  right: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  z-index: 2005;
+}
+
+.project-overlay-images-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 80px;
+  width: 100%;
+}
+
+.project-overlay-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0px;
+}
+
+/* Images with a non-16:9 natural ratio (e.g. A-series book spreads ≈ √2) */
+.project-overlay-img--a4 {
+  aspect-ratio: 1188 / 840;
+}
+
+.project-overlay-img--auto {
+  aspect-ratio: auto;
+}

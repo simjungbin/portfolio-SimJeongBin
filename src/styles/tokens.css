@@ -32,16 +32,16 @@
      3. Typography Tokens (Registered Figma Text Variables)
      ========================================================================== */
 
-  /* xsmall: Regular (size: 13, weight: 400, lineHeight: 1.4, letterSpacing: -3%) */
+  /* xsmall: Regular (size: 12, weight: 400, lineHeight: 1.4, letterSpacing: -3%) */
   --typography-xsmall-regular-font-family: var(--font-family-pretendard);
-  --typography-xsmall-regular-font-size: 13px;
+  --typography-xsmall-regular-font-size: 12px;
   --typography-xsmall-regular-font-weight: 400;
   --typography-xsmall-regular-line-height: 1.4;
   --typography-xsmall-regular-letter-spacing: -0.39px;
 
-  /* xsmall: Regular_M (size: 13, weight: 500, lineHeight: 1.4, letterSpacing: -3%) */
+  /* xsmall: Regular_M (size: 12, weight: 500, lineHeight: 1.4, letterSpacing: -3%) */
   --typography-xsmall-regular-m-font-family: var(--font-family-pretendard);
-  --typography-xsmall-regular-m-font-size: 13px;
+  --typography-xsmall-regular-m-font-size: 12px;
   --typography-xsmall-regular-m-font-weight: 500;
   --typography-xsmall-regular-m-line-height: 1.4;
   --typography-xsmall-regular-m-letter-spacing: -0.39px;
