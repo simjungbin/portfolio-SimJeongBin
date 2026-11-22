@@ -1,0 +1,94 @@
+/**
+ * Design Tokens - SimJeongBin Portfolio
+ * Source: Figma file "portfolio-SimJeongBin" (Node 25:3)
+ * Generated via Figma MCP inspection.
+ */
+
+:root {
+  /* ==========================================================================
+     1. Color Variables (Exact Figma Names & Values)
+     ========================================================================== */
+  --color-black-0: #ffffff;
+  --color-black-200: #b3b3b3;
+  --color-black-300: #8e8e8e;
+  --color-black-800: #1a1a1a;
+
+  /* Aliases matching exact Figma variable paths */
+  --black-0: var(--color-black-0);
+  --black-200: var(--color-black-200);
+  --black-300: var(--color-black-300);
+  --black-800: var(--color-black-800);
+
+  /* Unverified color values used directly in design layers */
+  --color-unverified-placeholder-gray: #d9d9d9;
+
+  /* ==========================================================================
+     2. Font Families
+     ========================================================================== */
+  --font-family-pretendard: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-family-syne: "Syne", sans-serif;
+
+  /* ==========================================================================
+     3. Typography Tokens (Registered Figma Text Variables)
+     ========================================================================== */
+
+  /* xsmall: Regular (size: 13, weight: 400, lineHeight: 1.4, letterSpacing: -3%) */
+  --typography-xsmall-regular-font-family: var(--font-family-pretendard);
+  --typography-xsmall-regular-font-size: 13px;
+  --typography-xsmall-regular-font-weight: 400;
+  --typography-xsmall-regular-line-height: 1.4;
+  --typography-xsmall-regular-letter-spacing: -0.39px;
+
+  /* xsmall: Regular_M (size: 13, weight: 500, lineHeight: 1.4, letterSpacing: -3%) */
+  --typography-xsmall-regular-m-font-family: var(--font-family-pretendard);
+  --typography-xsmall-regular-m-font-size: 13px;
+  --typography-xsmall-regular-m-font-weight: 500;
+  --typography-xsmall-regular-m-line-height: 1.4;
+  --typography-xsmall-regular-m-letter-spacing: -0.39px;
+
+  /* small: Regular (size: 16, weight: 400, lineHeight: 1.4, letterSpacing: -3%) */
+  --typography-small-regular-font-family: var(--font-family-pretendard);
+  --typography-small-regular-font-size: 16px;
+  --typography-small-regular-font-weight: 400;
+  --typography-small-regular-line-height: 1.4;
+  --typography-small-regular-letter-spacing: -0.48px;
+
+  /* regular: Regular_M (size: 20, weight: 500, lineHeight: 1.4, letterSpacing: -3%) */
+  --typography-regular-regular-m-font-family: var(--font-family-pretendard);
+  --typography-regular-regular-m-font-size: 20px;
+  --typography-regular-regular-m-font-weight: 500;
+  --typography-regular-regular-m-line-height: 1.4;
+  --typography-regular-regular-m-letter-spacing: -0.60px;
+
+  /* regular: Regular_B (size: 20, weight: 600, lineHeight: 1.4, letterSpacing: -3%) */
+  --typography-regular-regular-b-font-family: var(--font-family-pretendard);
+  --typography-regular-regular-b-font-size: 20px;
+  --typography-regular-regular-b-font-weight: 600;
+  --typography-regular-regular-b-line-height: 1.4;
+  --typography-regular-regular-b-letter-spacing: -0.60px;
+
+  /* large: Medium (size: 39, weight: 500, lineHeight: 1.2, letterSpacing: -3%) - defined in document variables */
+  --typography-large-medium-font-family: var(--font-family-pretendard);
+  --typography-large-medium-font-size: 39px;
+  --typography-large-medium-font-weight: 500;
+  --typography-large-medium-line-height: 1.2;
+  --typography-large-medium-letter-spacing: -1.17px;
+
+  /* ==========================================================================
+     4. Verified Layout Text Styles (Unbound Direct Layer Styles)
+     ========================================================================== */
+
+  /* Header Brand Text (SimJeongBin, node 28:3) */
+  --typography-header-brand-font-family: var(--font-family-syne);
+  --typography-header-brand-font-size: 20px;
+  --typography-header-brand-font-weight: 800;
+  --typography-header-brand-line-height: 1.2;
+  --typography-header-brand-letter-spacing: -0.40px;
+
+  /* Footer Action Text (BACK TO TOP, node 59:10) */
+  --typography-footer-action-font-family: var(--font-family-syne);
+  --typography-footer-action-font-size: 16px;
+  --typography-footer-action-font-weight: 800;
+  --typography-footer-action-line-height: 1.2;
+  --typography-footer-action-letter-spacing: -0.32px;
+}

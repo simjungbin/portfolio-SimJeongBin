@@ -1,0 +1,369 @@
+/* ==========================================================================
+   SimJeongBin Portfolio - Main Stylesheet
+   Source: Figma file "portfolio-SimJeongBin" (Node 25:3)
+   ========================================================================== */
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-black-0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-black-0);
+  color: var(--color-black-800);
+  font-family: var(--font-family-pretendard);
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container: Exact 1440px desktop frame */
+.portfolio-main {
+  width: 1440px;
+  min-height: 2368px;
+  position: relative;
+  background-color: var(--color-black-0);
+}
+
+/* ==========================================================================
+   Header (Node 37:2819)
+   x: 0, y: 0, w: 1440, h: 80
+   padding: px: 80px, py: 20px, align-items: flex-end
+   Fixed at top of viewport, centered with the 1440px layout
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1440px;
+  height: 80px;
+  padding: 20px 80px;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.header-brand {
+  pointer-events: auto;
+  font-family: var(--typography-header-brand-font-family);
+  font-size: var(--typography-header-brand-font-size);
+  font-weight: var(--typography-header-brand-font-weight);
+  line-height: var(--typography-header-brand-line-height);
+  letter-spacing: var(--typography-header-brand-letter-spacing);
+  color: var(--color-black-800);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Top Section: Index (x: 80, y: 280, w: 411) + Project H. (x: 515, y: 280, w: 845)
+   ========================================================================== */
+.top-section {
+  position: absolute;
+  top: 280px;
+  left: 80px;
+  width: 1280px; /* 515 - 80 = 435 gap/offset; 411 + 24 (or 25) = 435 */
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* Index Navigation (Node 31:2767)
+   x: 80, y: 280, w: 411, h: 376
+   flex-col, gap: 100px
+   ========================================================================== */
+.index-nav {
+  width: 411px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  flex-shrink: 0;
+}
+
+.index-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.index-group-header {
+  border-bottom: 1px solid var(--color-black-800);
+  padding-bottom: 4px;
+  width: 100%;
+}
+
+.index-title-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  width: 100%;
+  height: 28px;
+}
+
+.index-title {
+  width: 60px;
+  font-family: var(--typography-regular-regular-b-font-family);
+  font-size: var(--typography-regular-regular-b-font-size);
+  font-weight: var(--typography-regular-regular-b-font-weight);
+  line-height: var(--typography-regular-regular-b-line-height);
+  letter-spacing: var(--typography-regular-regular-b-letter-spacing);
+  color: var(--color-black-800);
+}
+
+.index-count {
+  font-family: var(--font-family-pretendard);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.6px;
+  color: var(--color-black-800);
+  white-space: nowrap;
+}
+
+.index-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  font-family: var(--typography-xsmall-regular-font-family);
+  font-size: var(--typography-xsmall-regular-font-size);
+  font-weight: var(--typography-xsmall-regular-font-weight);
+  line-height: var(--typography-xsmall-regular-line-height);
+  letter-spacing: var(--typography-xsmall-regular-letter-spacing);
+}
+
+.index-item {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  height: 18px;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.index-num {
+  width: 30px;
+  color: var(--color-black-800);
+  flex-shrink: 0;
+}
+
+.index-name {
+  color: var(--color-black-300);
+  white-space: nowrap;
+  transition: color 250ms ease-in-out;
+}
+
+.index-item:hover .index-name {
+  color: var(--color-black-800);
+}
+
+/* ==========================================================================
+   Featured Project Card: Project H. (Node 39:48)
+   x: 515, y: 280, w: 845, h: 656
+   ========================================================================== */
+.featured-card {
+  width: 845px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-image-wrapper {
+  width: 845px;
+  height: 600px;
+  border-radius: 60px;
+  overflow: hidden;
+  background-color: var(--color-unverified-placeholder-gray);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 60px;
+  pointer-events: none;
+  transform: scale(1.04);
+  transition: transform 400ms ease-out;
+  will-change: transform;
+}
+
+.featured-card:hover .card-image,
+.project-card:hover .card-image {
+  transform: scale(1);
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  width: 100%;
+  line-height: 1.4;
+}
+
+.card-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 18px;
+  font-family: var(--font-family-pretendard);
+  font-size: 13px;
+  letter-spacing: -0.39px;
+  white-space: nowrap;
+}
+
+.card-category {
+  font-weight: 500;
+  color: var(--color-black-800);
+}
+
+.card-year {
+  font-weight: 400;
+  color: var(--color-black-300);
+}
+
+.card-title {
+  font-family: var(--typography-regular-regular-m-font-family);
+  font-size: var(--typography-regular-regular-m-font-size);
+  font-weight: var(--typography-regular-regular-m-font-weight);
+  line-height: var(--typography-regular-regular-m-line-height);
+  letter-spacing: var(--typography-regular-regular-m-letter-spacing);
+  color: var(--color-black-800);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Projects Grid (Node 79:270)
+   x: 80, y: 956, w: 1281, h: 1092
+   gap: 20px between rows (556 - 536 = 20px)
+   ========================================================================== */
+.projects-grid {
+  position: absolute;
+  top: 956px;
+  left: 80px;
+  width: 1281px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grid-row {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+  width: 1281px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.card-411 {
+  width: 411px;
+}
+
+.card-410 {
+  width: 410px;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  height: 480px;
+  border-radius: 60px;
+  overflow: hidden;
+  background-color: var(--color-unverified-placeholder-gray);
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Footer: BACK TO TOP (Node 59:15)
+   x: 612, y: 2248, w: 217, h: 20
+   (1440 - 217) / 2 = 611.5px -> exact center
+   ========================================================================== */
+.footer {
+  position: absolute;
+  top: 2248px;
+  left: 612px;
+  width: 217px;
+  height: 20px;
+}
+
+.back-to-top {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.back-to-top-text {
+  font-family: var(--typography-footer-action-font-family);
+  font-size: var(--typography-footer-action-font-size);
+  font-weight: var(--typography-footer-action-font-weight);
+  line-height: var(--typography-footer-action-line-height);
+  letter-spacing: var(--typography-footer-action-letter-spacing);
+  color: var(--color-black-800);
+  white-space: nowrap;
+}
+
+.back-to-top-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.back-to-top-icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .card-image,
+  .index-name {
+    transition: none !important;
+  }
+}
+

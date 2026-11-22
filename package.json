@@ -1,0 +1,29 @@
+{
+  "name": "portfolio-simjeongbin",
+  "version": "1.0.0",
+  "description": "Personal UI/UX Design Portfolio Website",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simjungbin/portfolio-SimJeongBin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/simjungbin/portfolio-SimJeongBin/issues"
+  },
+  "homepage": "https://github.com/simjungbin/portfolio-SimJeongBin#readme",
+  "devDependencies": {
+    "vite": "^8.3.5"
+  }
+}
