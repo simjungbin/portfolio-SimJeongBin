@@ -43,6 +43,59 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================================
+     1b. Project Visibility Filter
+     =========================================================================
+     Controls which projects are displayed in the homepage grid and Work navigation.
+     Change any boolean to `true` to immediately restore that project.
+     All overlays, assets, and detail views remain 100% functional.
+     ========================================================================= */
+  const PROJECT_VISIBILITY = {
+    'project-h': true,   // 01. Project H.
+    'lotte-mart': true,  // 02. LOTTE MART × ZETTA Renewal
+    'orb': true,         // 03. ORB — Tableware Branding Website
+    'ibm': false,        // 04. Type Specimen Mini Book IBM Plex Mono
+    'comma': false,      // 05. 쉼표 — Smart IoT Service
+    'eroom': false,      // 06. 이룸 — Social Connection App
+    'kyobo': false,      // 07. Kyobobook Brand campaign renewal
+  };
+
+  const applyProjectVisibility = (config = PROJECT_VISIBILITY) => {
+    // 1. Sync project cards and work index items by data-project-id
+    Object.entries(config).forEach(([id, isVisible]) => {
+      document.querySelectorAll(`[data-project-id="${id}"]`).forEach(el => {
+        el.setAttribute('data-visible', isVisible ? 'true' : 'false');
+      });
+    });
+
+    // 2. Sync grid rows (hide empty rows)
+    document.querySelectorAll('.projects-grid .grid-row').forEach(row => {
+      const visibleCards = row.querySelectorAll('.project-card[data-visible="true"]');
+      row.setAttribute('data-visible', visibleCards.length > 0 ? 'true' : 'false');
+    });
+
+    // 3. Sync Work count [N]
+    const visibleCount = Object.values(config).filter(Boolean).length;
+    const workCountEl = document.querySelector('.index-group[data-name="work"] .index-count');
+    if (workCountEl) {
+      workCountEl.textContent = `[${visibleCount}]`;
+    }
+  };
+
+  // Global helper functions for easy console testing or future restoration
+  window.setProjectVisibility = (id, isVisible) => {
+    if (id in PROJECT_VISIBILITY) {
+      PROJECT_VISIBILITY[id] = !!isVisible;
+      applyProjectVisibility(PROJECT_VISIBILITY);
+    }
+  };
+  window.restoreAllProjects = () => {
+    Object.keys(PROJECT_VISIBILITY).forEach(k => { PROJECT_VISIBILITY[k] = true; });
+    applyProjectVisibility(PROJECT_VISIBILITY);
+  };
+
+  applyProjectVisibility();
+
+  /* =========================================================================
      2. Project overlay open / close  (shared)
      ========================================================================= */
   const allOverlays    = document.querySelectorAll('.project-overlay');
@@ -80,14 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     activeOverlay = targetOverlay;
     activeOverlay.classList.remove('is-closing');
-    activeOverlay.style.display = 'block';
+    activeOverlay.style.display = activeOverlay.classList.contains('intro-overlay') ? 'flex' : 'block';
     void activeOverlay.offsetWidth; // force reflow so CSS animation restarts
     activeOverlay.classList.add('is-open');
     activeOverlay.setAttribute('aria-hidden', 'false');
 
-    // Reset image-column scroll to top on open
+    // Reset scroll to top on open
+    activeOverlay.scrollTop = 0;
     const scrollCol = activeOverlay.querySelector('.project-overlay-scroll-column');
     if (scrollCol) scrollCol.scrollTop = 0;
+    const introCardWrapper = activeOverlay.querySelector('.intro-card-wrapper');
+    if (introCardWrapper) introCardWrapper.scrollTop = 0;
   };
 
   /* --- Close -------------------------------------------------------------- */
@@ -126,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ibmOverlay       = document.getElementById('projectOverlayIbm');
   const commaOverlay     = document.getElementById('projectOverlayComma');
   const eroomOverlay     = document.getElementById('projectOverlayEroom');
+  const kyoboOverlay     = document.getElementById('projectOverlayKyobo');
   const lotteMartCard    = document.querySelector('.project-card[data-name="LOTTE MART × ZETTA Renewal"]');
   const lotteMartIndex   = document.querySelector('.index-item[data-node-id="31:2745"]');
   const orbCard          = document.querySelector('.project-card[data-name="ORB — Tableware Branding Website"]');
@@ -136,6 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const commaIndex       = document.querySelector('.index-item[data-node-id="31:2757"]');
   const eroomCard        = document.querySelector('[data-name="이룸 — Social Connection App"]');
   const eroomIndex       = document.querySelector('.index-item[data-node-id="88:271"]');
+  const kyoboCard        = document.querySelector('[data-name="Kyobobook Brand campaign renewal"]');
+  const kyoboIndex       = document.querySelector('.index-item[data-node-id="34:2770"]');
 
   if (lotteMartCard)  lotteMartCard.addEventListener('click',  (e) => openOverlay(lotteOverlay, e));
   if (lotteMartIndex) lotteMartIndex.addEventListener('click', (e) => openOverlay(lotteOverlay, e));
@@ -147,6 +206,66 @@ document.addEventListener('DOMContentLoaded', () => {
   if (commaIndex)     commaIndex.addEventListener('click',     (e) => openOverlay(commaOverlay, e));
   if (eroomCard)      eroomCard.addEventListener('click',      (e) => openOverlay(eroomOverlay, e));
   if (eroomIndex)     eroomIndex.addEventListener('click',     (e) => openOverlay(eroomOverlay, e));
+  if (kyoboCard)      kyoboCard.addEventListener('click',      (e) => openOverlay(kyoboOverlay, e));
+  if (kyoboIndex)     kyoboIndex.addEventListener('click',     (e) => openOverlay(kyoboOverlay, e));
+  const introOverlay = document.getElementById('introductionOverlay');
+  const introIndex = document.querySelector('.index-item[data-node-id="36:2799"]');
+  const contactIndex = document.querySelector('.index-item[data-node-id="36:2802"]');
+
+  /* --- Introduction / Contact tab switching -------------------------------- */
+  const switchIntroTab = (tabName) => {
+    if (!introOverlay) return;
+    const tabs = introOverlay.querySelectorAll('.intro-card-tab');
+    const panels = introOverlay.querySelectorAll('.intro-tab-content');
+
+    tabs.forEach(tab => {
+      const isTarget = tab.getAttribute('data-tab') === tabName;
+      tab.classList.toggle('active', isTarget);
+      // Active tab gets brackets, inactive tab is plain text
+      if (tab.getAttribute('data-tab') === 'introduction') {
+        tab.textContent = isTarget ? '[Introduction]' : 'Introduction';
+      } else if (tab.getAttribute('data-tab') === 'contact') {
+        tab.textContent = isTarget ? '[Contact]' : 'Contact';
+      }
+    });
+
+    panels.forEach(panel => {
+      panel.classList.toggle('active', panel.getAttribute('data-tab-panel') === tabName);
+    });
+
+    // Reset internal scroll when switching tabs
+    const wrapper = introOverlay.querySelector('.intro-card-wrapper');
+    if (wrapper) wrapper.scrollTop = 0;
+  };
+
+  // Tab click handlers inside the card
+  if (introOverlay) {
+    introOverlay.addEventListener('click', (e) => {
+      const tab = e.target.closest('.intro-card-tab');
+      if (!tab || tab.classList.contains('active')) return;
+      e.stopPropagation(); // prevent closing overlay
+      switchIntroTab(tab.getAttribute('data-tab'));
+    });
+  }
+
+  // Homepage: Introduction opens overlay with Introduction tab active
+  if (introIndex) introIndex.addEventListener('click', (e) => {
+    switchIntroTab('introduction');
+    openOverlay(introOverlay, e);
+  });
+
+  // Homepage: Contact opens overlay with Contact tab active
+  if (contactIndex) contactIndex.addEventListener('click', (e) => {
+    switchIntroTab('contact');
+    openOverlay(introOverlay, e);
+  });
+
+  // Prevent contact links from closing the overlay
+  if (introOverlay) {
+    introOverlay.querySelectorAll('.contact-value, .contact-link').forEach(link => {
+      link.addEventListener('click', (e) => e.stopPropagation());
+    });
+  }
 
   /* --- Close triggers ----------------------------------------------------- */
 
@@ -164,7 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (
         e.target.closest('.project-overlay-info')          ||
         e.target.closest('.project-overlay-scroll-column') ||
-        e.target.closest('.project-overlay-header')
+        e.target.closest('.project-overlay-header')        ||
+        e.target.closest('.intro-card')
       ) return;
       closeActiveOverlay();
     });
@@ -218,11 +338,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Determine which cursor label to show for a given hovered element.
        Returns 'back', 'focus', or null (native cursor area). */
     const getCursorMode = (target) => {
-      // Always native in info panel, header, logo, explore links
+      // Always native in info panel, header, logo, explore links, intro card
       if (
         target.closest('.project-overlay-header') ||
         target.closest('.project-overlay-info')   ||
-        target.closest('.overlay-explore-link')
+        target.closest('.overlay-explore-link')   ||
+        target.closest('.intro-card')
       ) return null;
 
       // Project images → Focus
